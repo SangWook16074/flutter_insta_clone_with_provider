@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_instagram_clone_with_provider/src/ui/app/app_view_model.dart';
+import 'package:flutter_instagram_clone_with_provider/src/widget/image_avatar.dart';
 import 'package:flutter_instagram_clone_with_provider/src/widget/image_data.dart';
 import 'package:provider/provider.dart';
 
@@ -8,9 +9,14 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: _body(),
-      bottomNavigationBar: _bottomNav(),
+    final viewModel = Provider.of<AppViewModel>(context);
+    return PopScope(
+      canPop: viewModel.canPop,
+      onPopInvoked: viewModel.back,
+      child: Scaffold(
+        body: _body(),
+        bottomNavigationBar: _bottomNav(),
+      ),
     );
   }
 
@@ -59,9 +65,17 @@ class App extends StatelessWidget {
                   activeIcon: ImageData(path: ImagePath.reelsOn),
                   label: ""),
               const BottomNavigationBarItem(
-                  icon: SizedBox(width: 30, height: 30, child: CircleAvatar()),
-                  activeIcon:
-                      SizedBox(width: 30, height: 30, child: CircleAvatar()),
+                  icon: ImageAvatar(
+                      type: ImageAvatarType.OFF,
+                      path:
+                          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTnnnObTCNg1QJoEd9Krwl3kSUnPYTZrxb5Ig&s",
+                      size: 28),
+                  activeIcon: ImageAvatar(
+                    type: ImageAvatarType.ON,
+                    path:
+                        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTnnnObTCNg1QJoEd9Krwl3kSUnPYTZrxb5Ig&s",
+                    size: 28,
+                  ),
                   label: ""),
             ]);
       });
