@@ -17,6 +17,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         theme: ThemeData(
             useMaterial3: false,
+            appBarTheme: const AppBarTheme(elevation: 0.0),
             colorScheme: const ColorScheme.light(
                 primary: Colors.white, secondary: Colors.black)),
         home: const App(),

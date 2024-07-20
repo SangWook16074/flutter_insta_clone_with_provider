@@ -38,6 +38,9 @@ dependencies:
   provider: ^6.1.2
   test: ^1.24.9
   cached_network_image: ^3.3.1
+  carousel_slider: ^4.2.1
+  smooth_page_indicator: ^1.2.0
+  expandable_text: ^2.3.0
 
 dev_dependencies:
   flutter_test:

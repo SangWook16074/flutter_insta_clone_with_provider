@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_instagram_clone_with_provider/src/ui/app/app_view_model.dart';
+import 'package:flutter_instagram_clone_with_provider/src/ui/home/home_view.dart';
 import 'package:flutter_instagram_clone_with_provider/src/widget/image_avatar.dart';
 import 'package:flutter_instagram_clone_with_provider/src/widget/image_data.dart';
 import 'package:provider/provider.dart';
@@ -24,9 +25,7 @@ class App extends StatelessWidget {
         return IndexedStack(
           index: provider.pageIndex,
           children: [
-            Container(
-              color: Colors.red,
-            ),
+            const HomeView(),
             Container(
               color: Colors.blue,
             ),
