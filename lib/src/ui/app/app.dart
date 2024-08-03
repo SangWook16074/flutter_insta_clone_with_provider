@@ -27,7 +27,13 @@ class App extends StatelessWidget {
           index: provider.pageIndex,
           children: [
             const HomeView(),
-            const SearchView(),
+            Navigator(
+              key: provider.key,
+              onGenerateRoute: (settings) {
+                return MaterialPageRoute(
+                    builder: (context) => const SearchView());
+              },
+            ),
             Container(
               color: Colors.yellow,
             ),
