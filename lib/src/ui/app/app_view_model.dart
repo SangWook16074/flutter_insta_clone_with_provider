@@ -1,6 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_instagram_clone_with_provider/src/ui/upload/upload_view.dart';
+import 'package:flutter_instagram_clone_with_provider/src/utils/global_variable.dart';
 
 enum Page { HOME, SEARCH, UPLOAD, REELS, MYPAGE }
 
@@ -24,10 +27,11 @@ class AppViewModel extends ChangeNotifier {
     switch (page) {
       case Page.HOME:
       case Page.SEARCH:
-      case Page.UPLOAD:
       case Page.REELS:
       case Page.MYPAGE:
         changeIndex(page.index);
+      case Page.UPLOAD:
+        moveToUpload();
     }
   }
 
@@ -49,5 +53,25 @@ class AppViewModel extends ChangeNotifier {
       _canPop = true;
       notifyListeners();
     }
+  }
+
+  void moveToUpload() {
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      final context = GlobalVariable.navigatorState.currentContext!;
+      Navigator.of(context).push(PageRouteBuilder(
+        pageBuilder: (context, animation, secondaryAnimation) =>
+            const UploadView(),
+        transitionsBuilder: (context, animation, secondaryAnimation, child) {
+          const begin = Offset(-1.0, 0.0);
+          const end = Offset.zero;
+          final tween = Tween(begin: begin, end: end);
+          final offsetAnimation = animation.drive(tween);
+          return SlideTransition(
+            position: offsetAnimation,
+            child: child,
+          );
+        },
+      ));
+    });
   }
 }
